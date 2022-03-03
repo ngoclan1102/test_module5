@@ -1,0 +1,141 @@
+
+<div class="container">
+  <h2>Book</h2><br>
+
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#create">
+    Tạo Mới
+  </button>
+  <br>
+  <br>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>author</th>
+      <th>description</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let b of books">
+      <td>{{b.id}}</td>
+      <td>{{b.title}}</td>
+      <td>{{b.author}}</td>
+      <td>{{b.description}}</td>
+      <td><button type="button" class="btn btn-outline-secondary" (click)="delete(b.id)">Xóa</button> ||
+      <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" (click)="showEdit(b)">Sửa</button> ||
+      <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#view" (click)="findBookById(b.id)">View</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Book</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+<form [formGroup]="formEdit">
+  <label>id :</label><br>
+  <label><input formControlName="id" readonly></label><br>
+  <label>title :</label><br>
+  <label><input formControlName="title" ></label><br>
+  <label>author :</label><br>
+  <label><input formControlName="author" ></label><br>
+  <label>description :</label><br>
+  <label><input formControlName="description" ></label><br>
+</form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteData()">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="edit()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="create">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Book</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form (ngSubmit)="formCreate" [formGroup]="formCreate">
+        <label>id :</label><br>
+        <label><input formControlName="id"></label><br>
+        <label>title :</label><br>
+        <label><input formControlName="title"></label><br>
+        <label>author :</label><br>
+        <label><input formControlName="author"></label><br>
+        <label>description :</label><br>
+        <label><input formControlName="description"></label><br>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteData()">Close</button>
+        <button type="submit" class="btn btn-danger" data-dismiss="modal" (click)="create()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="view">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Book</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h3>Id :</h3>
+        <p>{{book.id}}</p><br>
+           <h3>Title :</h3>
+        <p>{{book.title}}</p><br>
+           <h3>Author :</h3>
+        <p>{{book.author}}</p><br>
+           <h3>Description :</h3>
+        <p>{{book.description}}</p><br>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteData()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
